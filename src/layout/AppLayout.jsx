@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 import Loader from "../components/Loader";
 export default function AppLayout() {
   const navigation = useNavigation();
-  console.log(navigation.state)
+
   return (
     <>
       {navigation.state === "loading" ? (
