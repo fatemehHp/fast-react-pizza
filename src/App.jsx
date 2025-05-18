@@ -12,6 +12,8 @@ import Order from "./pages/Order/Order";
 import AppLayout from "./layout/AppLayout";
 import { loader } from "./pages/Menu/Menu";
 import Error from "./components/Error";
+import { orderLoader } from "./pages/Order/Order";
+import { action } from "./pages/CreateOrder/CreateOrder";
 
 const router = createBrowserRouter([
   {
@@ -35,10 +37,12 @@ const router = createBrowserRouter([
       {
         path: "/createOrder",
         element: <CreateOrder />,
+        action: action,
       },
       {
-        path: "/order",
+        path: "/order/:orderid",
         element: <Order />,
+        loader:orderLoader
       },
     ],
   },
