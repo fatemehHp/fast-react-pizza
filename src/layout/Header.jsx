@@ -1,16 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import SearchOrder from '../pages/CreateOrder/SearchOrder'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SearchOrder from '../pages/CreateOrder/SearchOrder';
 
 const Header = () => {
   return (
     <div>
       Header
-      <Link to="/menu">برو به منو</Link>
-      <SearchOrder/>
-
+      <Link
+        to='/menu'
+        className='text-xl  text-pink-500 text-center font-semibold '
+      >
+        برو به منو
+      </Link>
+      <SearchOrder />
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
