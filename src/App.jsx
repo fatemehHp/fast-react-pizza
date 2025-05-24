@@ -1,53 +1,49 @@
-import React from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useNavigation,
-} from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
-import Menu from './pages/Menu/Menu';
-import Cart from './pages/Cart/Cart';
-import CreateOrder from './pages/CreateOrder/CreateOrder';
-import Order from './pages/Order/Order';
-import AppLayout from './layout/AppLayout';
-import { loader } from './pages/Menu/Menu';
-import Error from './components/Error';
-import { orderLoader } from './pages/Order/Order';
-import { action } from './pages/CreateOrder/CreateOrder';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import Home from './ui/Home';
+import Error from './ui/Error';
+import Menu, { loader as menuLoader } from './features/menu/Menu';
+import Cart from './features/cart/Cart';
+import CreateOrder, {
+  action as createOrderAction,
+} from './features/order/CreateOrder';
+import Order, { loader as orderLoader } from './features/order/Order';
+import AppLayout from './ui/AppLayout';
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     errorElement: <Error />,
+
     children: [
       {
         path: '/',
-        element: <HomePage />,
+        element: <Home />,
       },
       {
         path: '/menu',
         element: <Menu />,
-        loader: loader,
+        loader: menuLoader,
         errorElement: <Error />,
       },
+      { path: '/cart', element: <Cart /> },
       {
-        path: '/cart',
-        element: <Cart />,
-      },
-      {
-        path: '/createOrder',
+        path: '/order/new',
         element: <CreateOrder />,
-        action: action,
+        action: createOrderAction,
       },
       {
-        path: '/order/:orderid',
+        path: '/order/:orderId',
         element: <Order />,
         loader: orderLoader,
+        errorElement: <Error />,
       },
     ],
   },
 ]);
 
-export default function App() {
+function App() {
   return <RouterProvider router={router} />;
 }
+
+export default App;
