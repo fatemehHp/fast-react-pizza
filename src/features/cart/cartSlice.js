@@ -42,5 +42,6 @@ export const {
   deleteItem,
   increaseItemQuantity,
   decreaseItemQuantity,
+  cleareCart,
 } = cartSliice.actions;
 export default cartSliice.reducer;
