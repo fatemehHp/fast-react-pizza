@@ -7,9 +7,7 @@ import UpdateItemQuantity from '../cart/UpdateItemQuantity';
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log(cartItems);
   const isToCartitem = cartItems.find((item) => item.pizzaId === id);
-  console.log(isToCartitem);
 
   const dispatch = useDispatch();
   const selectedAddToCart = {
