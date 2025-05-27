@@ -18,25 +18,38 @@ const cartSliice = createSlice({
     },
     deleteItem(state, action) {
       // payload=id
-      state.cart = state.cart.filter((item) => action.payload != item.id);
+      state.cart = state.cart.filter((item) => action.payload != item.pizzaId);
     },
     increaseItemQuantity(state, action) {
       // payload=itemId
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity++;
-      item.totalPrice = state.quantity * state.unitPrice;
+      item.totalPrice = item.quantity * item.unitPrice;
     },
     decreaseItemQuantity(state, action) {
       // payload=itemId
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity--;
       item.totalPrice = item.quantity * item.unitPrice;
+      if (item.quantity === 0) {
+        cartSliice.caseReducers.deleteItem(state, action);
+        console.log('u');
+        console.log('u');
+      }
     },
     cleareCart(state, action) {
       state.cart = [];
     },
   },
 });
+// get total quantity
+export function getTotalQuantity(state) {
+  return state.cart.cart.reduce((sum, item) => (sum = sum + item.quantity), 0);
+}
+// get total Price
+export function getTotalPrice(state) {
+  return state.cart.cart.reduce((sum, item) => (sum = sum + item.unitPrice), 0);
+}
 export const {
   addItem,
   deleteItem,

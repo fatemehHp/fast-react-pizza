@@ -12,10 +12,10 @@ function Cart() {
   const dipatch = useDispatch();
 
   // handleDeleteCsrtItem
-  function handleCleare(itemId) {
+  function handleCleare() {
     dipatch(cleareCart());
   }
-  if (!cartData.lenght) {
+  if (!cartData.length) {
     return <EmptyCart />;
   }
   return (
@@ -26,7 +26,7 @@ function Cart() {
 
       <ul className='mt-3 divide-y divide-stone-200 border-b'>
         {cartData.map((item) => (
-          <CartItem item={item} key={item.id} />
+          <CartItem item={item} key={item.pizzaId} />
         ))}
       </ul>
 

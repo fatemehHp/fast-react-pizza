@@ -1,20 +1,24 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 import { addItem } from '../cart/cartSlice';
+import UpdateItemQuantity from '../cart/UpdateItemQuantity';
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const cartItems = useSelector((state) => state.cart.cart);
+  console.log(cartItems);
+  const isToCartitem = cartItems.find((item) => item.pizzaId === id);
+  console.log(isToCartitem);
 
   const dispatch = useDispatch();
   const selectedAddToCart = {
-    id,
+    pizzaId: id,
     name,
     unitPrice,
   };
 
   function handleAddToCart(selectedAddToCart) {
-    console.log(selectedAddToCart);
     dispatch(addItem(selectedAddToCart));
   }
 
@@ -38,13 +42,16 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
+          <div className='flex gap-2  '>
+            {isToCartitem ? <UpdateItemQuantity pizzaId={id} /> : null}
 
-          <Button
-            type='small'
-            onClick={() => handleAddToCart(selectedAddToCart)}
-          >
-            Add to cart
-          </Button>
+            <Button
+              type='small'
+              onClick={() => handleAddToCart(selectedAddToCart)}
+            >
+              Add to cart
+            </Button>
+          </div>
         </div>
       </div>
     </li>
