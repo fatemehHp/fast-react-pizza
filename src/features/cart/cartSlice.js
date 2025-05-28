@@ -13,13 +13,14 @@ const cartSliice = createSlice({
         cartSliice.caseReducers.increaseItemQuantity(state, {
           payload: action.payload.pizzaId,
         });
+      } else {
+        state.cart.push({
+          ...action.payload,
+          quantity: 1,
+          totalPrice: action.payload.unitPrice * 1,
+        });
       }
       // payload=newItem
-      state.cart.push({
-        ...action.payload,
-        quantity: 1,
-        totalPrice: action.payload.unitPrice * 1,
-      });
     },
     deleteItem(state, action) {
       // payload=id
@@ -62,6 +63,10 @@ export function getCurrentQuantity(state, currentId) {
   const currenItem = state.cart.cart.find((item) => item.pizzaId === currentId);
 
   return currenItem.quantity;
+}
+// getCart
+export function getCart(state) {
+  return state.cart.cart;
 }
 export const {
   addItem,
